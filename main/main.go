@@ -15,11 +15,11 @@ func runSocket() {
 }
 
 func runHttp() {
-	httpserver.StartServer()
+	httpserver.StartServer("localhost:8080")
 	fmt.Scanln()
 }
 
 func main() {
-	//runHttp()
-	runSocket()
+	runHttp()
+	//runSocket()
 }

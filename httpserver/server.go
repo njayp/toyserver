@@ -5,7 +5,9 @@ import (
 	"net/http"
 )
 
-func StartServer() {
+func StartServer(addr string) {
+
+
 	h1 := func(w http.ResponseWriter, _ *http.Request) {
 		println("server recieved request on \\")
 		io.WriteString(w, "Hello from \\!\n")
@@ -20,5 +22,6 @@ func StartServer() {
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/echo", h2)
 
-	go http.ListenAndServe(":8080", nil)
+	go http.ListenAndServe(addr, nil)
+	println("server listening on " + addr)
 }
