@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	socketserver.StartServer(socketserver.EchoServer{})
+	socketserver.StartServer(socketserver.EchoHandler{})
 	for {
 		fmt.Scanln()
 		client.Ping()

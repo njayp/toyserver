@@ -5,10 +5,10 @@ import (
 	"bufio"
 )
 
-type EchoServer struct {
+type EchoHandler struct {
 }
 
-func (server EchoServer) reply(conn net.Conn) {
+func (handler EchoHandler) handle(conn net.Conn) {
 	message, _ := bufio.NewReader(conn).ReadBytes('\n')
 	conn.Write([]byte("hi from echoServer: "))
 	conn.Write(message)

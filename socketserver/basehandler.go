@@ -4,10 +4,10 @@ import (
 	"net"
 )
 
-type BaseServer struct {
+type BaseHandler struct {
 }
 
-func (server BaseServer) reply(conn net.Conn) {
+func (handler BaseHandler) handle(conn net.Conn) {
 	message := []byte("hi from baseServer\n")
 	conn.Write(message)
 	conn.Close()

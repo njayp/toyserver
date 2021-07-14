@@ -4,25 +4,24 @@ import (
 	"net"
 )
 
-type Server interface {
-	reply(net.Conn)
+type Handler interface {
+	handle(net.Conn)
 }
 
-func StartServer(server Server) Server {
+func StartServer(handler Handler) {
 	listener, err := net.Listen("tcp", ":8080")
 	if err == nil {
-		go serve(server, listener)
+		go serve(handler, listener)
 	} else {
 		println(err.Error())
 	}
-	return server
 }
 
-func serve(server Server, listener net.Listener) {
+func serve(handler Handler, listener net.Listener) {
 	for {
 		conn, err := listener.Accept()
 		if err == nil {
-			go server.reply(conn)
+			go handler.handle(conn)
 		} else {
 			println(err.Error())
 		}
