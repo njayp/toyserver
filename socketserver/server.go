@@ -8,8 +8,8 @@ type Handler interface {
 	handle(net.Conn)
 }
 
-func StartServer(handler Handler) {
-	listener, err := net.Listen("tcp", ":8080")
+func StartServer(handler Handler, addr string) {
+	listener, err := net.Listen("tcp", addr)
 	if err == nil {
 		go serve(handler, listener)
 	} else {

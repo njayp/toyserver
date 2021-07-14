@@ -3,14 +3,23 @@ package main
 import (
 	"fmt"
 
-	"github.com/njayp/toyserver/client"
+	"github.com/njayp/toyserver/socketclient"
 	"github.com/njayp/toyserver/socketserver"
+	"github.com/njayp/toyserver/httpserver"
 )
 
+func runSocket() {
+	addr := "localhost:8080"
+	socketserver.StartServer(socketserver.EchoHandler{}, addr)
+	println(socketclient.SocketPing("here there be dragons\n", addr))
+}
+
+func runHttp() {
+	httpserver.StartServer()
+	fmt.Scanln()
+}
+
 func main() {
-	socketserver.StartServer(socketserver.EchoHandler{})
-	for {
-		fmt.Scanln()
-		client.Ping()
-	}
+	//runHttp()
+	runSocket()
 }
