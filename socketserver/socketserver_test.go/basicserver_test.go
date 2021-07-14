@@ -5,6 +5,6 @@ import (
 	"testing"
 )
 
-func TestBasicCreation(t *testing.T) {
+func TestBaseCreation(t *testing.T) {
 	//server := socketserver.EchoServer{}.Start()
 }
