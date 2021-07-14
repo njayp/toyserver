@@ -6,7 +6,6 @@ import (
 )
 
 type EchoServer struct {
-	BaseServer
 }
 
 func (server EchoServer) reply(conn net.Conn) {
