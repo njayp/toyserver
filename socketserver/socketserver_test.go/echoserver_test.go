@@ -10,7 +10,7 @@ func TestEcho(t *testing.T) {
 	addr := "localhost:8011"
 	socketserver.StartServer(socketserver.EchoHandler{}, addr)
 	message := "test message\n" // must end with \n
-	resp := socketclient.SocketPing(message, addr)
+	resp := socketclient.SocketPost(message, addr)
 	if resp != socketserver.ECHOGREETING + message {
 		t.Errorf("echo server fail, recieved: " + resp)
 	}

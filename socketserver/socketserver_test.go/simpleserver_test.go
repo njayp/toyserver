@@ -6,10 +6,10 @@ import (
 	"testing"
 )
 
-func TestBase(t *testing.T) {
+func TestSimple(t *testing.T) {
 	addr := "localhost:8010"
 	socketserver.StartServer(socketserver.SimpleHandler{}, addr)
-	resp := socketclient.SocketPing("", addr)
+	resp := socketclient.SocketPost("", addr)
 	if resp != socketserver.SIMPLEGREETING {
 		t.Errorf("basic server fail, recieved: " + resp)
 	}
