@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"net"
+	"time"
 )
 
 // delimiter strategy
@@ -31,6 +32,7 @@ func SessionPost(addr string, nomsg int) string {
 		conn.Write([]byte(fmt.Sprintf(SESSIONMESSAGE, i)))
 		message, _ := bufio.NewReader(conn).ReadString('\n')
 		messages += message
+		time.Sleep(time.Second)
 	}
 
 	conn.Close()
