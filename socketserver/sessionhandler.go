@@ -14,17 +14,17 @@ type SessionHandler struct {
 }
 
 func splitf(data []byte, atEOF bool) (advance int, token []byte, err error) {
-	
+
 	// built-in MaxScanTokenSize = 64 * 1024 bytes
 	/*
-	const maxbytes = 10000
-	if len(data) > maxbytes {
-		return 0, nil, bufio.ErrTooLong
-	}
+		const maxbytes = 10000
+		if len(data) > maxbytes {
+			return 0, nil, bufio.ErrTooLong
+		}
 	*/
 
 	// "\r\n\r\n" to get header
-	if i := bytes.Index(data, []byte("\n")); i >= 0 {
+	if i := bytes.Index(data, []byte("\r\n\r\n")); i >= 0 {
 		return i + 1, data[:i+1], nil
 	}
 
@@ -44,7 +44,7 @@ func (handler SessionHandler) handle(conn net.Conn) {
 
 	scanner.Split(splitf)
 	conn.SetDeadline(time.Now().Add(time.Second * 10))
-	
+
 	for scanner.Scan() {
 		msgcount += 1
 		conn.Write([]byte(fmt.Sprintf(SESSIONGREETING, msgcount)))
